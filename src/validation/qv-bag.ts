@@ -35,7 +35,16 @@ import {
   modulo,
   only,
 } from "../rules";
-import { afterDate, beforeDate, isDate, isTime } from "../rules/date";
+import {
+  afterDate,
+  beforeDate,
+  isDate,
+  isDay,
+  isHOrMorSecond,
+  isMonth,
+  isTime,
+  isYear,
+} from "../rules/date";
 import { QvLocal } from "../locale/qv-local";
 import { phone } from "../rules/phone";
 interface IQvBag {
@@ -87,6 +96,12 @@ export class QvBag implements IQvBag {
     stringBetween: stringBetween,
     mod: modulo,
     only: only,
+    year: isYear,
+    month: isMonth,
+    day: isDay,
+    hour: isHOrMorSecond,
+    minute: isHOrMorSecond,
+    second: isHOrMorSecond,
   };
 
   /**

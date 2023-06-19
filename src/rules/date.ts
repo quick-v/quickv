@@ -101,3 +101,83 @@ export const isTime: RuleCallBack = (input: string) => {
   }
   return /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/.test(input);
 };
+
+/**
+ * Checks whether a given year is valid.
+ *
+ * @param input - The year to check.
+ * @returns `true` if the input year is valid, `false` otherwise.
+ * @example
+ * ```js
+ * {
+ *    rules:['year']
+ * }
+ * ```
+ * ```html
+ * <input data-qv-rules="year" />
+ * ```
+ */
+export const isYear: RuleCallBack = (input: string) => {
+  const year = parseInt(input, 10);
+  return !isNaN(year) && year >= 1000 && year <= 9999;
+};
+
+/**
+ * Checks whether a given month is valid.
+ *
+ * @param input - The month to check.
+ * @returns `true` if the input month is valid, `false` otherwise.
+ * @example
+ * ```js
+ * {
+ *    rules:['month']
+ * }
+ * ```
+ * ```html
+ * <input data-qv-rules="month" />
+ * ```
+ */
+export const isMonth: RuleCallBack = (input: string) => {
+  const month = parseInt(input, 10);
+  return !isNaN(month) && month >= 1 && month <= 12;
+};
+
+/**
+ * Checks whether a given day is valid.
+ *
+ * @param input - The day to check.
+ * @returns `true` if the input day is valid, `false` otherwise.
+ * @example
+ * ```js
+ * {
+ *    rules:['day']
+ * }
+ * ```
+ * ```html
+ * <input data-qv-rules="day" />
+ * ```
+ */
+export const isDay: RuleCallBack = (input: string) => {
+  const day = parseInt(input, 10);
+  return !isNaN(day) && day >= 1 && day <= 31;
+};
+
+/**
+ * Checks whether a given hour is valid.
+ *
+ * @param input - The hour to check.
+ * @returns `true` if the input hour is valid, `false` otherwise.
+ * @example
+ * ```js
+ * {
+ *    rules:['hour']
+ * }
+ * ```
+ * ```html
+ * <input data-qv-rules="hour" />
+ * ```
+ */
+export const isHOrMorSecond: RuleCallBack = (input: string) => {
+  const hour = parseInt(input, 10);
+  return !isNaN(hour) && hour >= 0 && hour <= 23;
+};

@@ -54,4 +54,10 @@ export const en_messages: RulesMessages = {
   modulo: "The value of :field field must be a multiple of :arg0",
   mod: "The value of :field field must be a multiple of :arg0",
   only: "The format of this field is not accepted, as it contains non-allowed characters",
+  year: "This field must be a valid year",
+  month: "This field must be a valid month",
+  day: "This field must be a valid day",
+  hour: "This field must be a valid day",
+  minute: "This field must be a valid minute",
+  second: "This field must be a valid second",
 };

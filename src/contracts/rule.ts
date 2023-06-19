@@ -45,4 +45,10 @@ export type Rule =
   | "stringBetween"
   | "modulo"
   | "mod"
-  | "only";
+  | "only"
+  | "year"
+  | "month"
+  | "day"
+  | "hour"
+  | "minute"
+  | "second";
