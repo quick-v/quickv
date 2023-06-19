@@ -13,9 +13,11 @@ If you'd like to make changes to the code, we encourage you to propose a pull re
 1. Fork the repository and clone it locally on your machine.
 2. Switch to the `2.0.0` branch you wish to work on.
 3. Install the project's dependencies locally by running the following command:
+
 ```bash
    npm install
 ```
+
 4. Make any necessary changes and test them thoroughly. For example, you can add a new rule (see below for details).
 5. Commit your changes using the command `git commit -m "Description of changes"`.
 6. Transfer your changes to your forked repository.
@@ -44,6 +46,7 @@ The development team
 A Quickv rule is simply a callback function that handles validation according to your needs and must return a boolean value. It should implement the `RuleCallBack` interface defined in `./src/contracts/rule-callback.ts`.
 
 Based on the type of data your callback will validate, you should categorize it under one of the following files:
+
 - `./src/rules` (global, number, phone, string, date, file, etc.)
 
 Here's an example implementation of a callback for the `in` rule:
@@ -66,17 +69,20 @@ export const inInput: RuleCallBack = (input, params) => {
 ```
 
 Explanation:
+
 1. The first argument, `input`, corresponds to the current value of the field to be validated. It can be of types such as `string`, `Blob`, `File`, `number`, `null`, `boolean`, `undefined`, `FileList`.
-2. The second argument, `params`, corresponds to the possible arguments. The arguments are comma-separated strings. You can individually retrieve them using the `splitParam` function. 
-For example, if you have an HTML field like this: 
-```html 
+2. The second argument, `params`, corresponds to the possible arguments. The arguments are comma-separated strings. You can individually retrieve them using the `splitParam` function.
+   For example, if you have an HTML field like this:
+
+```html
 <input data-qv-rules="in:active, inactive, suspended" />
 ```
+
 The values after the colon (`:`) are the parameters. In this case, the second argument would be a string like `"active, inactive, suspended"`. You can use the `splitParam(params ?? "")` function to get an array of individual values, for example, `['active', 'inactive', 'suspended']`.
 
 3. The rest of the code represents the logic of the callback. In this example, we check if the current value of the field is in the specified list and return the result.
 
-***The callback must return a boolean value.***
+**_The callback must return a boolean value._**
 
 #### Naming Convention
 
@@ -124,7 +130,6 @@ npm test
 
 Once your tests pass successfully, you can proceed to the next step.
 
-
 ### Step 3: Add the callback to the rules
 
 All Quickv rules are listed in the `Rule` type, which can be found in the `./src/contracts/rule.ts` file. You need to add your rule to this type for it to be recognized.
@@ -146,7 +151,7 @@ In this file, the `QvBag` class is used to store the rules. You need to add your
 
 ```typescript
 export class QvBag implements IQvBag {
-  private static rules: RulesBag = { 
+  private static rules: RulesBag = {
     in: inInput,
   };
 }
@@ -162,7 +167,7 @@ Here's an example of adding messages for the `in` rule:
 
 ```ts
 export const en_messages: RulesMessages = {
-  default: "This field is invalid", 
+  default: "This field is invalid",
   in: "Please choose a correct value for the :field field",
 };
 ```
@@ -178,7 +183,11 @@ If you have followed these steps correctly, you can test your rule by using it i
 Here's an example code to write the `in` rule callback:
 
 ```typescript
-import { RuleCallBack, spliteParam, throwEmptyArgsException } from "../validation/quickv";
+import {
+  RuleCallBack,
+  spliteParam,
+  throwEmptyArgsException,
+} from "../validation/quickv";
 
 /**
  * Check if the input value is in the specified list.
@@ -250,7 +259,7 @@ export class QvBag implements IQvBag {
 
 #### Step 5: Assign a message to the rule
 
-In the language files `./src/local/lang`, assign a message to the `in` rule for each supported language. Here's an example for English and French languages:
+In the language files `./src/locale/lang`, assign a message to the `in` rule for each supported language. Here's an example for English and French languages:
 
 ```typescript
 // ./src/local/lang/en.ts
@@ -259,6 +268,6 @@ export const en_messages: RulesMessages = {
   contains: "The :field field must contain the value ':arg0'",
   in: "Please choose a correct value for the :field field",
 };
-``` 
+```
 
 Once you have completed these steps, you can push your changes and create a Pull Request to contribute to the project.

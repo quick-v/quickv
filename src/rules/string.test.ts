@@ -6,6 +6,7 @@ import {
   minlength,
   passwordRule,
   startWithLetter,
+  endWithLetter,
   startWithLower,
   startWithUpper,
   stringBetween,
@@ -132,9 +133,9 @@ describe("startWithLetter", () => {
   });
 
   test("should return false if input does not start with letter", () => {
-    expect(startWithUpper("1hello")).toBe(false);
-    expect(startWithUpper("-test")).toBe(false);
-    expect(startWithUpper(" test")).toBe(false);
+    expect(startWithLetter("1hello")).toBe(false);
+    expect(startWithLetter("-test")).toBe(false);
+    expect(startWithLetter(" test")).toBe(false);
   });
 
   test("should return false for empty input", () => {
@@ -146,6 +147,29 @@ describe("startWithLetter", () => {
     expect(startWithLetter(null)).toBe(false);
     expect(startWithLetter(undefined)).toBe(false);
     expect(startWithLetter(true)).toBe(false);
+  });
+});
+
+describe("endWithLetter", () => {
+  test("should return true if input ends with letter", () => {
+    expect(endWithLetter("Hello")).toBe(true);
+  });
+
+  test("should return false if input does not end with letter", () => {
+    expect(startWithUpper("hello1")).toBe(false);
+    expect(startWithUpper("test-")).toBe(false);
+    expect(startWithUpper("test ")).toBe(false);
+  });
+
+  test("should return false for empty input", () => {
+    expect(endWithLetter("")).toBe(false);
+  });
+
+  test("should return false for non-string input", () => {
+    expect(endWithLetter(123)).toBe(false);
+    expect(endWithLetter(null)).toBe(false);
+    expect(endWithLetter(undefined)).toBe(false);
+    expect(endWithLetter(true)).toBe(false);
   });
 });
 

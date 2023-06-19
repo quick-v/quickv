@@ -272,6 +272,24 @@ export const startWithLetter: RuleCallBack = (input) => {
 };
 
 /**
+ * Checks if the input ends with a letter.
+ *
+ * @param input - The input to check.
+ * @example
+ *  ```html
+ *  <input data-qv-rules="endWithLetter"/>
+ * ```
+ * @returns `true` if the input ends with a letter, `false` otherwise.
+ */
+export const endWithLetter: RuleCallBack = (input) => {
+  if (!is_string(input) || input.length === 0) {
+    return false;
+  }
+  const regex = /[a-zA-Z]$/;
+  return regex.test(input);
+};
+
+/**
  * Checks if the input contains a letter.
  *
  * @param input - The input to check.

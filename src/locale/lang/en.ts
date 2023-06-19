@@ -42,6 +42,7 @@ export const en_messages: RulesMessages = {
   phone: "This phone number seems to be invalid",
   time: "The :field field must be a valid time.",
   startWithLetter: "The :field field must start with a letter",
+  endWithLetter: "The :field field must end with a letter",
   excludes: "The :field field must not contain :arg0.",
   hasLetter: "This field must contain at least one letter",
   regex: "This field is invalid.",

@@ -36,6 +36,7 @@ export type Rule =
   | "url"
   | "time"
   | "startWithLetter"
+  | "endWithLetter"
   | "hasLetter"
   | "excludes"
   | "regex"

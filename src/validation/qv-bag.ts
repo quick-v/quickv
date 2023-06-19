@@ -1,4 +1,4 @@
-import { stringBetween } from "./../rules/string";
+import { endWithLetter, stringBetween } from "./../rules/string";
 import { minFileSize } from "./../rules/file";
 import { Rule, RuleCallBack, RulesBag, RulesMessages } from "../contracts";
 import {
@@ -78,6 +78,7 @@ export class QvBag implements IQvBag {
     phone: phone,
     time: isTime,
     startWithLetter: startWithLetter,
+    endWithLetter: endWithLetter,
     excludes: excludes,
     hasLetter: containsLetter,
     regex: regex,
