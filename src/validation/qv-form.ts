@@ -1,5 +1,6 @@
 import {
   EventCallback,
+  EventCallbackWithDetails,
   QvFormConfig,
   QvInputParms,
   RuleCallBack,
@@ -49,7 +50,7 @@ export class QvForm {
    */
   private _qvDisabledClass = "qvDisabled";
 
-  private _triggerValidationEvents = ["change", "qv.form.validate"];
+  private _triggerValidationEvents = ["change", "qv.form.update"];
   /**
    * The html form
    */
@@ -310,13 +311,15 @@ export class QvForm {
    * @param fn - The callback function to execute when the event occurs.
    * Example:
    * ```typescript
-   * qvForm.onFails((e) => {
-   *   console.log("Form validation failed", e);
+   * qvForm.onFails((qvForm) => {
+   *   console.log("Form validation failed", qvForm);
    * });
    * ```
    */
-  onFails(fn: EventCallback): void {
-    this.on("qv.form.fails", fn);
+  onFails(fn: EventCallbackWithDetails<QvForm>): void {
+    this.on("qv.form.fails", (e) => {
+      this.__call(fn, (e as CustomEvent).detail);
+    });
   }
 
   /**
@@ -325,13 +328,32 @@ export class QvForm {
    * @param fn - The callback function to execute when the event occurs.
    * Example:
    * ```typescript
-   * qvForm.onPasses((e) => {
-   *   console.log("Form validation passed", e);
+   * qvForm.onPasses((qvForm) => {
+   *   console.log("Form validation passed", qvForm);
    * });
    * ```
    */
-  onPasses(fn: EventCallback): void {
-    this.on("qv.form.passes", fn);
+  onPasses(fn: EventCallbackWithDetails<QvForm>): void {
+    this.on("qv.form.passes", (e) => {
+      this.__call(fn, (e as CustomEvent).detail);
+    });
+  }
+
+  /**
+   * Attaches an event listener to the "qv.form.validate" event.
+   * This event is triggered when the form is validated.
+   * @param fn - The callback function to execute when the event occurs.
+   * Example:
+   * ```typescript
+   * qvForm.onValidate((qvForm) => {
+   *   console.log("Form validation executed", qvForm);
+   * });
+   * ```
+   */
+  onValidate(fn: EventCallbackWithDetails<QvForm>): void {
+    this.on("qv.form.validate", (e) => {
+      this.__call(fn, (e as CustomEvent).detail);
+    });
   }
 
   /**
@@ -358,14 +380,14 @@ export class QvForm {
   }
   /**
    * Triggers the validation process for the form.
-   * This method emits the "qv.form.validate" event, which initiates the validation of all form inputs.
+   * This method emits the "qv.form.update" event, which initiates the validation of all form inputs.
    * Example:
    * ```typescript
-   * qvForm.validate();
+   * qvForm.update ();
    * ```
    */
-  validate() {
-    this.emit("qv.form.validate");
+  update() {
+    this.emit("qv.form.update");
   }
 
   /**
@@ -426,7 +448,7 @@ export class QvForm {
     this.container.removeEventListener("submit", this._onSubmit);
 
     const evs = this._triggerValidationEvents.filter(
-      (event) => event !== "qv.form.validate"
+      (event) => event !== "qv.form.update"
     );
     evs.forEach((ev) => {
       this.container.removeEventListener(ev, this._handle);
@@ -446,7 +468,8 @@ export class QvForm {
   private _emitQvOnFailsEvent() {
     //If qv.form.fails
     if (this._emitOnFails) {
-      this.emit("qv.form.fails");
+      this.emit("qv.form.fails", this);
+      this.emit("qv.form.validate", this);
       this._emitOnFails = false;
       //Open _emitOnPasses, for the next qv.form.passes event
       this._emitOnPasses = true;
@@ -459,7 +482,8 @@ export class QvForm {
   private _emitQvOnPassesEvent() {
     //If qv.form.passes
     if (this._emitOnPasses) {
-      this.emit("qv.form.passes");
+      this.emit("qv.form.passes", this);
+      this.emit("qv.form.validate", this);
       this._emitOnPasses = false;
       //Open _emitOnFails, for the next qv.form.fails event
       this._emitOnFails = true;

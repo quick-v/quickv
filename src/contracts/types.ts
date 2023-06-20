@@ -120,6 +120,12 @@ export type QvInputParms = {
  */
 export type EventCallback = (event: Event) => void;
 
+/**
+ * Callback function for handling events.
+ *
+ * @param details - The event object.
+ */
+export type EventCallbackWithDetails<T> = (details: T) => void;
 export type QvFormConfig = {
   /**
    * Specifies whether the form will be validated as the user types in the form fields
