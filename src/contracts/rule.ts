@@ -46,10 +46,4 @@ export type Rule =
   | "modulo"
   | "mod"
   | "only"
-  | "year"
-  | "month"
-  | "day"
-  | "hour"
-  | "minute"
-  | "second"
   | "mimes";

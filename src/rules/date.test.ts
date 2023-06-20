@@ -1,13 +1,4 @@
-import {
-  afterDate,
-  beforeDate,
-  dateBetween,
-  isDate,
-  isDay,
-  isHOrMorSecond,
-  isMonth,
-  isYear,
-} from "./date";
+import { afterDate, beforeDate, dateBetween, isDate } from "./date";
 
 describe("isDate", () => {
   test("should return true for a valid date in UTC format", () => {
@@ -170,64 +161,5 @@ describe("dateBetween", () => {
     const startDate = "2023-04-24";
     const endDate = "2023-04-xx";
     expect(dateBetween(inputDate, `${startDate}, ${endDate}`)).toBe(false);
-  });
-});
-
-describe("isYear", () => {
-  it("should return true for a valid year", () => {
-    expect(isYear("2022")).toBe(true);
-  });
-
-  it("should return false for an invalid year", () => {
-    expect(isYear("abc")).toBe(false);
-    expect(isYear("20222")).toBe(false);
-    expect(isYear("99")).toBe(false);
-    expect(isYear("10000")).toBe(false);
-  });
-});
-
-describe("isMonth", () => {
-  it("should return true for valid months", () => {
-    expect(isMonth("1")).toBe(true);
-    expect(isMonth("01")).toBe(true);
-    expect(isMonth("6")).toBe(true);
-    expect(isMonth("06")).toBe(true);
-    expect(isMonth("12")).toBe(true);
-  });
-
-  it("should return false for invalid months", () => {
-    expect(isMonth("0")).toBe(false);
-    expect(isMonth("13")).toBe(false);
-    expect(isMonth("00")).toBe(false);
-    expect(isMonth("99")).toBe(false);
-    expect(isMonth("abc")).toBe(false);
-  });
-});
-
-describe("isDay rule", () => {
-  it("should return true for valid days", () => {
-    expect(isDay("1")).toBe(true);
-    expect(isDay("15")).toBe(true);
-    expect(isDay("31")).toBe(true);
-  });
-
-  it("should return false for invalid days", () => {
-    expect(isDay("0")).toBe(false);
-    expect(isDay("32")).toBe(false);
-    expect(isDay("abc")).toBe(false);
-  });
-});
-
-describe("isHOrMorSecond rule", () => {
-  it("should return true for valid hours", () => {
-    expect(isHOrMorSecond("0")).toBe(true);
-    expect(isHOrMorSecond("12")).toBe(true);
-    expect(isHOrMorSecond("23")).toBe(true);
-  });
-
-  it("should return false for invalid hours", () => {
-    expect(isHOrMorSecond("-1")).toBe(false);
-    expect(isHOrMorSecond("24")).toBe(false);
-    expect(isHOrMorSecond("abc")).toBe(false);
   });
 });
