@@ -76,3 +76,7 @@ If you have any questions or concerns, you can contact us via email at dev.claud
 Quickv is released under our [license](https://quickv.vercel.app/docs/license) and developed by [Claude Fassinou](https://github.com/Claudye) and contributors.
 
 Best regards
+
+## Security
+
+If you discover any security-related issues, please contact me directly at dev.claudy@gmail.com instead of using the issue tracker
