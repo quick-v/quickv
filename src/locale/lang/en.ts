@@ -60,4 +60,5 @@ export const en_messages: RulesMessages = {
   hour: "This field must be a valid day",
   minute: "This field must be a valid minute",
   second: "This field must be a valid second",
+  mimes: "This file format is not supported",
 };

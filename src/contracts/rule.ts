@@ -51,4 +51,5 @@ export type Rule =
   | "day"
   | "hour"
   | "minute"
-  | "second";
+  | "second"
+  | "mimes";

@@ -1,5 +1,5 @@
 import { endWithLetter, stringBetween } from "./../rules/string";
-import { minFileSize } from "./../rules/file";
+import { isMimes, minFileSize } from "./../rules/file";
 import { Rule, RuleCallBack, RulesBag, RulesMessages } from "../contracts";
 import {
   between,
@@ -102,6 +102,7 @@ export class QvBag implements IQvBag {
     hour: isHOrMorSecond,
     minute: isHOrMorSecond,
     second: isHOrMorSecond,
+    mimes: isMimes,
   };
 
   /**

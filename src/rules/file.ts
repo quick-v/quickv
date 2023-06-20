@@ -1,5 +1,5 @@
 import { RuleCallBack } from "../contracts";
-import { spliteParam } from "../utils";
+import { spliteParam, throwEmptyArgsException } from "../utils";
 
 /**
  * Checks whether a given value is a `File` or `Blob` object.
@@ -118,4 +118,43 @@ export const minFileSize: RuleCallBack = (input, minSize) => {
 export const fileBetween: RuleCallBack = (input, min_max) => {
   const [min, max] = spliteParam(min_max ?? "");
   return maxFileSize(input, max) && minFileSize(input, min);
+};
+
+/**
+ * Checks whether the MIME type of a given `File` or `Blob` object matches the specified MIME type.
+ *
+ * @param input - The `File` or `Blob` object to check.
+ * @param param - The MIME type(s) to match. It can be a wildcard (*), a specific MIME type (.pdf), or a MIME type group (images/*).
+ *
+ * @example
+ * ```html
+ * <input type="file" data-qv-rules="mimies:.pdf"
+ * ```
+ * @returns `true` if the MIME type of the input object matches the specified MIME type, `false` otherwise.
+ */
+export const isMimes: RuleCallBack = (input, param) => {
+  if (!param) {
+    throwEmptyArgsException("mimes");
+  }
+  if (input instanceof File) {
+    const file = input as File;
+    const allowedMimes = param?.split(",").map((m) => m.trim()) ?? [];
+
+    return allowedMimes.some((allowedMime) => {
+      allowedMime = allowedMime.replace(/\s/g, "");
+      if (allowedMime === "*") {
+        return true; // Wildcard (*) matches any MIME type
+      } else if (allowedMime.endsWith("/*")) {
+        const group = allowedMime.slice(0, -2); // Remove the trailing /*
+        return file.type.startsWith(group);
+      } else if (allowedMime.startsWith("*.")) {
+        const ext = allowedMime.substring(2); // get extension without the "*."
+        return file.name.endsWith(ext);
+      } else {
+        return file.type === allowedMime;
+      }
+    });
+  } else {
+    return false;
+  }
 };
