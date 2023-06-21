@@ -144,7 +144,7 @@ export abstract class AbstractInputValidator {
 
     this.inputElement = inputElement as HTMLInputElement;
 
-    this.param.type = this.inputElement.type;
+    this.param.type = this.inputElement.type ?? "text";
   }
 
   private setInputName() {
