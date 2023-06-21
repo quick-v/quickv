@@ -223,6 +223,9 @@ export class QvForm {
     });
   }
 
+  passes() {
+    return this.isValid();
+  }
   /**
    * Handle validation before process submtion
    */
