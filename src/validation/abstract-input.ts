@@ -143,8 +143,10 @@ export abstract class AbstractInputValidator {
     }
 
     this.inputElement = inputElement as HTMLInputElement;
-
-    this.param.type = this.inputElement.type ?? "text";
+    this.param.type = this.inputElement.type;
+    if (this.inputElement.tagName.toLowerCase() === "textarea") {
+      this.param.type = "text";
+    }
   }
 
   private setInputName() {
