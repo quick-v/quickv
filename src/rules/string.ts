@@ -314,7 +314,7 @@ export const containsLetter: RuleCallBack = (input) => {
  * @param excludedChars - The characters to exclude, separated by comma.
  *  @example
  *  ```html
- *  <input data-qv-rules="excludes:-,@"/>
+ *  <input data-qv-rules="excludes:-,@,&esp;"/>
  * ```
  * @returns `true` if the input does not contain any of the specified characters, `false` otherwise.
  */
