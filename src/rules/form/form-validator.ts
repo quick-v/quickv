@@ -45,7 +45,7 @@ export class FormValidator extends AbstractFormValidator {
    * @param parameter
    * @returns
    */
-  requiredIf(input: any, parameter?: string): boolean {
+  requiredIf(input: any, parameter?: string) {
     const [inputName, ...params] = spliteParam(parameter ?? "");
 
     if (inputName && params.length > 0) {

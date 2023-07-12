@@ -53,4 +53,8 @@ export class Quickv {
       this.config = { ...this.config, ...config };
     }
   }
+
+  static Rule(ruleName: string, call: RuleCallBack, message?: string) {
+    QvBag.rule(ruleName, call, message);
+  }
 }
