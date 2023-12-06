@@ -1,4 +1,5 @@
 import { RulesMessages } from ".";
+import { QvForm } from "../validation";
 import { Rule } from "./rule";
 
 /**
@@ -145,3 +146,5 @@ export type QvFormConfig = {
    */
   invalidClass?: string;
 };
+
+export type QvFormHandler = (qv: QvForm) => unknown;

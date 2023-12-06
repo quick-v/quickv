@@ -2,6 +2,7 @@ import {
   EventCallback,
   EventCallbackWithDetails,
   QvFormConfig,
+  QvFormHandler,
   QvInputParms,
   RuleCallBack,
   ValidatableForm,
@@ -88,7 +89,7 @@ export class QvForm {
     }
 
     if (!(container instanceof HTMLElement)) {
-      throw new Error("The 'container' parameter must be of type HTMLElement.");
+      throw new Error("The 'html container or html form' doesn't exist.");
     }
 
     this.container = container;
@@ -116,6 +117,8 @@ export class QvForm {
       this.validateOnQvEvent();
     }
 
+    this.emit("qv.form.init", this);
+
     this._onSubmit();
 
     this.onFails((e) => {
@@ -125,13 +128,11 @@ export class QvForm {
     this.onPasses((e) => {
       this.enableButton();
     });
-
-    this.emit("qv.form.init");
   }
   /**
    * Disable submission  button on failed
    */
-  private disableButton() {
+  disableButton() {
     if (this.submitButton) {
       this.submitButton.setAttribute("disabled", "true");
       if (this._qvDisabledClass) {
@@ -154,7 +155,7 @@ export class QvForm {
   /**
    * Enable submission button on success
    */
-  private enableButton() {
+  enableButton() {
     if (this.submitButton) {
       this.submitButton.removeAttribute("disabled");
       if (this._qvEnabledClass) {
@@ -319,7 +320,7 @@ export class QvForm {
    * });
    * ```
    */
-  onFails(fn: EventCallbackWithDetails<QvForm>): void {
+  onFails(fn: QvFormHandler): void {
     this.on("qv.form.fails", (e) => {
       this.__call(fn, (e as CustomEvent).detail);
     });
@@ -336,7 +337,7 @@ export class QvForm {
    * });
    * ```
    */
-  onPasses(fn: EventCallbackWithDetails<QvForm>): void {
+  onPasses(fn: QvFormHandler): void {
     this.on("qv.form.passes", (e) => {
       this.__call(fn, (e as CustomEvent).detail);
     });
@@ -353,7 +354,7 @@ export class QvForm {
    * });
    * ```
    */
-  onValidate(fn: EventCallbackWithDetails<QvForm>): void {
+  onValidate(fn: QvFormHandler): void {
     this.on("qv.form.validate", (e) => {
       this.__call(fn, (e as CustomEvent).detail);
     });
@@ -390,7 +391,7 @@ export class QvForm {
    * ```
    */
   update() {
-    this.emit("qv.form.update");
+    this.emit("qv.form.update", this);
   }
 
   /**
@@ -541,5 +542,17 @@ export class QvForm {
     for (const [inputName, params] of Object.entries(inputs)) {
       this.with(inputName, params);
     }
+  }
+
+  onInit(fn: QvFormHandler) {
+    this.on("qv.form.init", (event: any) => {
+      this.__call(fn, event.detail);
+    });
+  }
+
+  onUpdate(fn: QvFormHandler) {
+    this.on("qv.form.update", (event: any) => {
+      this.__call(fn, event.detail);
+    });
   }
 }
