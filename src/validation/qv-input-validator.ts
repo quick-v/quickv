@@ -185,7 +185,7 @@ export class QvInputValidator extends AbstractInputValidator {
    * @returns
    */
   passes() {
-    return this._passed;
+    return this.valid();
   }
   /**
    * Invokes the provided function with the given parameters if it is a valid function.

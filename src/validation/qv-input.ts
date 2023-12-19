@@ -71,8 +71,17 @@ export class QvInput extends QvInputValidator {
   }
 
   destroy() {
+    this.param.events?.forEach((e) => {
+      this.inputElement.removeEventListener(e, () => {
+        this.validate();
+      });
+    });
     this.param.events = [];
     this.rules = [];
     this.param.rules = [];
+  }
+
+  is(input: HTMLInputElement) {
+    return input === this.inputElement;
   }
 }

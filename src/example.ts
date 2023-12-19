@@ -1,25 +1,20 @@
 import { QvForm, QvInput } from "./validation";
 const qvForm = new QvForm("form");
 
-const dz = document.querySelector("button");
-qvForm.onInit((qvForm) => {
-  //console.log(qvForm);
+qvForm.onInit((qv) => {
+  //L'instance QvForm est prête
 });
 
 qvForm.onFails((qv) => {
-  dz?.setAttribute("disabled", "true");
+  //Le formulaire a échoué
 });
 
 qvForm.onPasses((qv) => {
-  dz?.removeAttribute("disabled");
-});
-
-dz?.addEventListener("click", (e) => {
-  qvForm.update();
+  //Le formulaire passe
 });
 
 qvForm.onUpdate((qv) => {
-  console.log("Form updated", qv.passes());
-  dz?.setAttribute("disabled", "true");
+  //Le formulaire est mise à jour, ajout ou retrait d'un nouveau champ
 });
+
 qvForm.init();
