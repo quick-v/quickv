@@ -3,7 +3,7 @@ import { required } from "../global";
 import { AbstractFormValidator } from "./abstract-form-validator";
 
 export class FormValidator extends AbstractFormValidator {
-  constructor(form: HTMLFormElement) {
+  constructor(form: HTMLElement) {
     super(form);
     this.register();
   }

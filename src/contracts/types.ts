@@ -23,7 +23,7 @@ export type ValidatableInput =
 /**
  * Represents a validatable HTML form element.
  */
-export type ValidatableForm = HTMLFormElement | string | "form";
+export type ValidatableForm = HTMLElement | string | "form";
 /**
  * The possible input types expected to be gotten
  */

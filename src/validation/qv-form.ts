@@ -55,7 +55,7 @@ export class QvForm {
   /**
    * The html form
    */
-  private container!: HTMLFormElement;
+  private container!: HTMLElement;
 
   /**
    * The inputs rules

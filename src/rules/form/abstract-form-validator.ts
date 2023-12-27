@@ -6,7 +6,7 @@ export abstract class AbstractFormValidator {
     call: RuleCallBack;
   }[] = [];
 
-  constructor(protected form: HTMLFormElement) {}
+  constructor(protected form: HTMLElement) {}
   getInputByName(inputName: string) {
     return this.form.querySelector<HTMLInputElement>(`[name=${inputName}]`);
   }
