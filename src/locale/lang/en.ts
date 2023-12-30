@@ -55,4 +55,11 @@ export const en_messages: RulesMessages = {
   mod: "The value of :field field must be a multiple of :arg0",
   only: "The format of this field is not accepted, as it contains non-allowed characters",
   mimes: "This file format is not supported",
+  digit: "This field must be a numeric value with exactly :arg0 digits",
+  minDigit: "This field must be a numeric value with a minimum of :arg0 digits",
+  maxDigit: "This field must be a numeric value with a maximum of :arg0 digits",
+  lessThan: "This field must be a numeric value less than :arg0",
+  lthan: "This field must be a numeric value less than :arg0",
+  greaterThan: "This field must be a numeric value greater than :arg0",
+  gthan: "This field must be a numeric value greater than :arg0",
 };

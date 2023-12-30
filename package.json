@@ -1,6 +1,6 @@
 {
   "name": "quickv",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0-alpha.2",
   "description": "Quickv is a lightweight form validation library for web applications",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

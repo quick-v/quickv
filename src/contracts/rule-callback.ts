@@ -2,5 +2,5 @@
  * Rule callback
  */
 export interface RuleCallBack {
-  (input: any, param?: string): boolean;
+  (input: any, param?: any): boolean;
 }

@@ -34,6 +34,11 @@ import {
   upper,
   modulo,
   only,
+  digitRule,
+  minDigitRule,
+  lessthan,
+  maxDigitRule,
+  greaterthan,
 } from "../rules";
 import { afterDate, beforeDate, isDate, isTime } from "../rules/date";
 import { QvLocal } from "../locale/qv-local";
@@ -88,6 +93,13 @@ export class QvBag implements IQvBag {
     mod: modulo,
     only: only,
     mimes: isMimes,
+    digit: digitRule,
+    minDigit: minDigitRule,
+    lessThan: lessthan,
+    lthan: lessthan,
+    maxDigit: maxDigitRule,
+    greaterThan: greaterthan,
+    gthan: greaterthan,
   };
 
   /**

@@ -123,3 +123,49 @@ export const modulo: RuleCallBack = (input, mod) => {
 
   return false;
 };
+
+/**
+ * Checks whether the input is less than the specified value.
+ *
+ * @param input - The input to check.
+ * @param threshold - The threshold value.
+ * @example
+ * ```html
+ * <input qv-rules="lessThan:10"/>
+ * ```
+ * @returns `true` if the input is less than the specified value, `false` otherwise.
+ */
+export const lessthan: RuleCallBack = (input, threshold) => {
+  if (!isNumber(threshold)) {
+    throw new Error("Lessthan rule parameter must be a number");
+  }
+
+  if (isNumber(input)) {
+    return Number(input) < Number(threshold);
+  }
+
+  return false;
+};
+
+/**
+ * Checks whether the input is greater than the specified value.
+ *
+ * @param input - The input to check.
+ * @param threshold - The threshold value.
+ * @example
+ * ```html
+ * <input qv-rules="greaterThan:5"/>
+ * ```
+ * @returns `true` if the input is greater than the specified value, `false` otherwise.
+ */
+export const greaterthan: RuleCallBack = (input, threshold) => {
+  if (!isNumber(threshold)) {
+    throw new Error("Greaterthan rule parameter must be a number");
+  }
+
+  if (isNumber(input)) {
+    return Number(input) > Number(threshold);
+  }
+
+  return false;
+};

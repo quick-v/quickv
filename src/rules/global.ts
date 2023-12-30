@@ -186,3 +186,79 @@ export const only: RuleCallBack = (input, param) => {
 
   return false; // Invalid parameter, return false
 };
+
+/**
+ * Checks if the input is a digit (numeric value) with the specified number of digits.
+ *
+ * @param input - The input to check.
+ * @param digitCount - The number of digits.
+ * @example
+ * ```html
+ * <input data-qv-rules="digit:8"/>
+ * ```
+ * @returns `true` if the input is a digit with the specified number of digits, `false` otherwise.
+ */
+export const digitRule: RuleCallBack = (input, digitCount) => {
+  if (!isNumber(digitCount)) {
+    throw new Error("Digit rule parameter must be a number");
+  }
+
+  if (isNumber(input)) {
+    const inputValue = String(input);
+    return /^\d+$/.test(inputValue) && inputValue.length === Number(digitCount);
+  }
+
+  return false;
+};
+
+/**
+ * Checks if the input is a digit (numeric value) with a number of digits less than or equal to the specified maximum.
+ *
+ * @param input - The input to check.
+ * @param maxDigitCount - The maximum number of digits.
+ * @example
+ * ```html
+ * <input data-qv-rules="max_digit:10"/>
+ * ```
+ * @returns `true` if the input is a digit with a number of digits less than or equal to the specified maximum, `false` otherwise.
+ */
+export const maxDigitRule: RuleCallBack = (input, maxDigitCount) => {
+  if (!isNumber(maxDigitCount)) {
+    throw new Error("Max_digit rule parameter must be a number");
+  }
+
+  if (isNumber(input)) {
+    const inputValue = String(input);
+    return (
+      /^\d+$/.test(inputValue) && inputValue.length <= Number(maxDigitCount)
+    );
+  }
+
+  return false;
+};
+
+/**
+ * Checks if the input is a digit (numeric value) with a number of digits greater than or equal to the specified minimum.
+ *
+ * @param input - The input to check.
+ * @param minDigitCount - The minimum number of digits.
+ * @example
+ * ```html
+ * <input data-qv-rules="min_digit:5"/>
+ * ```
+ * @returns `true` if the input is a digit with a number of digits greater than or equal to the specified minimum, `false` otherwise.
+ */
+export const minDigitRule: RuleCallBack = (input, minDigitCount) => {
+  if (!isNumber(minDigitCount)) {
+    throw new Error("Min_digit rule parameter must be a number");
+  }
+
+  if (isNumber(input)) {
+    const inputValue = String(input);
+    return (
+      /^\d+$/.test(inputValue) && inputValue.length >= Number(minDigitCount)
+    );
+  }
+
+  return false;
+};

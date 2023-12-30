@@ -1,5 +1,13 @@
-import { between } from ".";
-import { integer, isNumber, maxRule, minRule, modulo } from "./number";
+import { between, minDigitRule } from ".";
+import {
+  greaterthan,
+  integer,
+  isNumber,
+  lessthan,
+  maxRule,
+  minRule,
+  modulo,
+} from "./number";
 
 test("minRule should return true when input is greater than or equal to min", () => {
   // Test with a string input
@@ -92,5 +100,51 @@ describe("modulo", () => {
 
   test("should return false if the number input is not a number", () => {
     expect(modulo("hello world", "4")).toBe(false);
+  });
+});
+
+describe("lessthan Rule", () => {
+  it("should return true when input is a number less than the threshold", () => {
+    expect(lessthan(5, 10)).toBe(true);
+    expect(lessthan(-5, 0)).toBe(true);
+  });
+
+  it("should return false when input is not a number", () => {
+    expect(lessthan("abc", 10)).toBe(false);
+    expect(lessthan(true, 5)).toBe(false);
+  });
+
+  it("should return false when input is a number greater than or equal to the threshold", () => {
+    expect(lessthan(10, 10)).toBe(false);
+    expect(lessthan(15, 10)).toBe(false);
+  });
+
+  it("should throw an error if threshold is not a number", () => {
+    expect(() => lessthan(5, "abc")).toThrowError(
+      "Lessthan rule parameter must be a number"
+    );
+  });
+});
+
+describe("greaterthan Rule", () => {
+  it("should return true when input is a number greater than the threshold", () => {
+    expect(greaterthan(10, 5)).toBe(true);
+    expect(greaterthan(0, -5)).toBe(true);
+  });
+
+  it("should return false when input is not a number", () => {
+    expect(greaterthan("abc", 10)).toBe(false);
+    expect(greaterthan(true, 5)).toBe(false);
+  });
+
+  it("should return false when input is a number less than or equal to the threshold", () => {
+    expect(greaterthan(5, 5)).toBe(false);
+    expect(greaterthan(-2, 0)).toBe(false);
+  });
+
+  it("should throw an error if threshold is not a number", () => {
+    expect(() => greaterthan(5, "abc")).toThrowError(
+      "Greaterthan rule parameter must be a number"
+    );
   });
 });

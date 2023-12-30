@@ -132,7 +132,7 @@ export const fileBetween: RuleCallBack = (input, min_max) => {
  * ```
  * @returns `true` if the MIME type of the input object matches the specified MIME type, `false` otherwise.
  */
-export const isMimes: RuleCallBack = (input, param) => {
+export const isMimes: RuleCallBack = (input, param: string) => {
   if (!param) {
     throwEmptyArgsException("mimes");
   }

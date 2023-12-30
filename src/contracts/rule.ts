@@ -46,4 +46,11 @@ export type Rule =
   | "modulo"
   | "mod"
   | "only"
-  | "mimes";
+  | "mimes"
+  | "digit"
+  | "minDigit"
+  | "maxDigit"
+  | "lessThan"
+  | "greaterThan"
+  | "gthan"
+  | "lthan";
